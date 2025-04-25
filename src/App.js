@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './app.css';
 import githubIcon from './img/image 1.png';
 import lupa from './img/Frame 52.png';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 export default function App() {
   const [username, setUsername] = useState('');
@@ -16,7 +17,7 @@ export default function App() {
 
     try {
       const res = await fetch(`https://api.github.com/users/${username}`);
-      if (!res.ok) throw new Error('Nenhum perfil foi encontrado com esse nome de de usuário. Tente novamente');
+      if (!res.ok) throw new Error('Nenhum perfil foi encontrado com esse nome de usuário. Tente novamente');
       const data = await res.json();
       setUserData(data);
     } catch (err) {
@@ -49,7 +50,7 @@ export default function App() {
           />
           <button
             onClick={fetchUser}
-            className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded"
+            className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded px-4"
           >
             <img
               src={lupa}
@@ -60,9 +61,9 @@ export default function App() {
         </div>
 
         {loading && (
-          <div className="animate-pulse bg-white p-4 rounded shadow mb-4">
-            <div className="h-6 bg-gray-200 rounded w-1/4 mb-4"></div>
-            <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+          <div className="flex flex-col items-center justify-center mt-8">
+            <ClipLoader color="#3B82F6" size={48} />
+            <p className="text-gray-600 mt-4 text-sm">Carregando perfil...</p>
           </div>
         )}
 
